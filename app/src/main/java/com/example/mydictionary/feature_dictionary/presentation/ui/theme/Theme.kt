@@ -1,4 +1,4 @@
-package com.example.mydictionary.ui.theme
+package com.example.mydictionary.feature_dictionary.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
