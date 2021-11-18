@@ -1,17 +1,14 @@
 package com.example.mydictionary.feature_dictionary.data.repository
 
-import android.util.Log
 import com.example.mydictionary.core.util.Resource
 import com.example.mydictionary.feature_dictionary.data.local.WordInfoDao
 import com.example.mydictionary.feature_dictionary.data.remote.DictionaryAPI
-import com.example.mydictionary.feature_dictionary.data.remote.dto.WordInfoDto
 import com.example.mydictionary.feature_dictionary.domain.model.WordInfo
 import com.example.mydictionary.feature_dictionary.domain.repository.WordInfoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
-import java.lang.NullPointerException
 
 class WordInfoRepositoryImpl(
     private val api: DictionaryAPI,
@@ -30,24 +27,28 @@ class WordInfoRepositoryImpl(
         try {
             val remoteWordInfo = api.getWordInfo(word)
             dao.deleteWordInfo(remoteWordInfo.map {
-                it.word!!
+                it.word
             })
             dao.insertWordInfo(remoteWordInfo.map {
                 it.toWordInfoEntity()
             })
         } catch (e: HttpException) {
-            emit(Resource.Error(
+            emit(
+                Resource.Error(
                     "Oops, something went wrong...",
-                    data = wordInfo)
+                    data = wordInfo
+                )
             )
         } catch (e: IOException) {
-            emit(Resource.Error(
-                "Couldn't reach the server...",
-                data = wordInfo)
+            emit(
+                Resource.Error(
+                    "Couldn't reach the server...",
+                    data = wordInfo
+                )
             )
         }
 
-        val newWordInfo = dao.getWordInfo(word).map{
+        val newWordInfo = dao.getWordInfo(word).map {
             it.toWordInfo()
         }
         emit(Resource.Success(newWordInfo))

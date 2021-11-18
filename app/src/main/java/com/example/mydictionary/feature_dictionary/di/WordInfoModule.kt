@@ -3,7 +3,6 @@ package com.example.mydictionary.feature_dictionary.di
 import android.app.Application
 import androidx.room.Room
 import com.example.mydictionary.feature_dictionary.data.local.Converters
-import com.example.mydictionary.feature_dictionary.data.local.WordInfoDao
 import com.example.mydictionary.feature_dictionary.data.local.WordInfoDatabase
 import com.example.mydictionary.feature_dictionary.data.remote.DictionaryAPI
 import com.example.mydictionary.feature_dictionary.data.remote.DictionaryAPI.Companion.BASE_URL
